@@ -1,0 +1,83 @@
+# Data Ingestion Configuration
+# Data source: Open Library API (https://openlibrary.org/developers/api)
+
+defaults:
+  db_url: postgresql+psycopg://user:pass@localhost:5432/ingest_db
+  batch_size: 5000
+  on_conflict: upsert
+
+sources:
+  - name: openlibrary_python_books
+    type: api
+    path: https://openlibrary.org/search.json?q=python+programming&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      subtitle: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      publisher: str
+      publish_date: str
+      isbn: str
+      number_of_pages_median: int
+      ratings_average: float
+      ratings_count: int
+      already_read_count: int
+      subject: str
+      has_fulltext: bool
+    rules:
+      - rule: "len(title) > 0"
+
+  - name: openlibrary_scifi_books
+    type: api
+    path: https://openlibrary.org/search.json?subject=science+fiction&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      subtitle: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      publisher: str
+      publish_date: str
+      isbn: str
+      number_of_pages_median: int
+      ratings_average: float
+      ratings_count: int
+      already_read_count: int
+      subject: str
+      has_fulltext: bool
+    rules:
+      - rule: "len(title) > 0"
+
+  - name: openlibrary_classics
+    type: api
+    path: https://openlibrary.org/search.json?subject=classic+literature&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      subtitle: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      publisher: str
+      publish_date: str
+      isbn: str
+      number_of_pages_median: int
+      ratings_average: float
+      ratings_count: int
+      already_read_count: int
+      subject: str
+      has_fulltext: bool
+    rules:
+      - rule: "len(title) > 0"
