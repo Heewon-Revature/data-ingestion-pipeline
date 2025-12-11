@@ -20,9 +20,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -40,9 +40,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -60,9 +60,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -80,9 +80,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -100,9 +100,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -120,9 +120,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -140,9 +140,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -160,9 +160,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -180,9 +180,9 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"
 
@@ -200,8 +200,8 @@ sources:
       has_fulltext: bool
     rules:
       - "len(title) > 0"
-      - "author_name NOT NULL"
+      - "len(author_name) > 0"
       - "first_publish_year NOT NULL"
-      - "language NOT NULL"
+      - "len(language) > 0"
       - "edition_count NOT NULL"
       - "has_fulltext NOT NULL"

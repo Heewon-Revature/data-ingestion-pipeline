@@ -118,3 +118,27 @@
 2025-12-10 18:21:58,234 - INFO - Total Duration:      449.29s
 2025-12-10 18:21:58,234 - INFO - Pipeline Status:     PARTIAL
 2025-12-10 18:21:58,234 - INFO - ============================================================
+2025-12-11 14:32:54,905 - INFO - Pipeline started - Processing 10 sources
+2025-12-11 14:32:54,906 - INFO - ============================================================
+2025-12-11 14:33:27,217 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 887 | Rejected: 137 | Inserted: 887 | Duration: 32.31s | Status: SUCCESS
+2025-12-11 14:33:51,477 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 24.26s | Status: SUCCESS
+2025-12-11 14:34:18,018 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 26.54s | Status: SUCCESS
+2025-12-11 14:34:39,739 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 21.72s | Status: SUCCESS
+2025-12-11 14:35:00,396 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 20.66s | Status: SUCCESS
+2025-12-11 14:35:41,343 - INFO - [openlibrary_history] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 40.95s | Status: SUCCESS
+2025-12-11 14:36:09,210 - INFO - [openlibrary_biography] Input: 1000 | Valid: 997 | Rejected: 3 | Inserted: 997 | Duration: 27.87s | Status: SUCCESS
+2025-12-11 14:36:31,337 - INFO - [openlibrary_horror] Input: 1000 | Valid: 992 | Rejected: 9 | Inserted: 992 | Duration: 22.13s | Status: SUCCESS
+2025-12-11 14:36:52,933 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 21.60s | Status: SUCCESS
+2025-12-11 14:37:19,316 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 26.38s | Status: SUCCESS
+2025-12-11 14:37:19,317 - INFO - ============================================================
+2025-12-11 14:37:19,317 - INFO - PIPELINE SUMMARY
+2025-12-11 14:37:19,317 - INFO - ============================================================
+2025-12-11 14:37:19,317 - INFO - Total Input Rows:    10000
+2025-12-11 14:37:19,317 - INFO - Valid Records:       9868
+2025-12-11 14:37:19,317 - INFO - Rejected Records:    159
+2025-12-11 14:37:19,317 - INFO - Inserted Records:    9868
+2025-12-11 14:37:19,318 - INFO - Sources Succeeded:   10
+2025-12-11 14:37:19,318 - INFO - Sources Failed:      0
+2025-12-11 14:37:19,318 - INFO - Total Duration:      264.91s
+2025-12-11 14:37:19,318 - INFO - Pipeline Status:     SUCCESS
+2025-12-11 14:37:19,318 - INFO - ============================================================
