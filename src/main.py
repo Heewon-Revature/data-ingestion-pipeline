@@ -1,201 +1,131 @@
 """
-Main ingestion pipeline.
-Orchestrates the complete data ingestion workflow.
+Main Pipeline - Orchestrates the ETL process.
 """
 
 import sys
+import logging
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from config import AppConfig, SourceConfig
-from readers import get_reader
-from validate import Validator
-from clean import Cleaner
-from load import DatabaseLoader
-from logger import logger
+from config import load_config
+from readers import fetch_data
+from clean import clean_data
+from validate import validate_data
+from load import create_loader, load_data, load_rejects, init_database
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler("pipeline.log"),
+    ]
+)
+logger = logging.getLogger(__name__)
 
 
-class IngestionPipeline:
-    """Main pipeline for ingesting data from sources to PostgreSQL."""
+'''
+Runs the full ingestion pipeline. It loads configuration,
+initializes database tables, iterates through each source to extract, clean,
+validate, and load data into PostgreSQL. It also keeps track of and logs 
+statistics for each source and produces a final summary.
+
+Args:
+    config_path: Path to the YAML configuration file.
+    init_db: If True, drop and recreate database tables before running.
+'''
+def run_pipeline(config_path, init_db=False):
+    pipeline_start = time.time()
+    config = load_config(config_path)
+    engine = create_loader(config["db_url"])
     
-    def __init__(self, config: AppConfig):
-        self.config = config
-        self.loader = DatabaseLoader(
-            db_url=config.db_url,
-            batch_size=config.batch_size,
-        )
+    if init_db:
+        init_database(engine)
     
-    def run_source(self, source_config: SourceConfig) -> dict:
-        """Run the ingestion pipeline for a single source."""
-        source_name = source_config.name
-        results = {
-            "source": source_name,
-            "status": "success",
-            "input_rows": 0,
-            "valid_rows": 0,
-            "rejected_rows": 0,
-            "inserted": 0,
-            "errors": [],
-        }
+    logger.info(f"Pipeline started - Processing {len(config['sources'])} sources")
+    logger.info("=" * 60)
+    
+    # Pipeline totals
+    total_input = 0
+    total_valid = 0
+    total_rejected = 0
+    total_inserted = 0
+    sources_succeeded = 0
+    sources_failed = 0
+    
+    for source in config["sources"]:
+        name = source["name"]
+        source_start = time.time()
+        status = "SUCCESS"
         
         try:
-            # Step 1: Read data
-            reader = get_reader(source_config)
-            df = reader.read()
-            results["input_rows"] = len(df)
-            logger.start_run(source_name, len(df), source_config.path)
+            # Extract
+            df = fetch_data(source["path"], pages=10)
             
-            # Step 2: Clean data
-            cleaner = Cleaner(source_config)
-            df = cleaner.clean(df)
+            if df.empty:
+                logger.warning(f"[{name}] No data fetched, skipping...")
+                sources_failed += 1
+                continue
             
-            # Step 3: Validate data
-            validator = Validator(source_config)
-            validation_result = validator.validate(df)
-            df = validation_result.valid_df
-            rejects = validation_result.rejects
+            input_rows = len(df)
+            total_input += input_rows
             
-            results["valid_rows"] = len(df)
-            results["rejected_rows"] = len(rejects)
-            logger.log_cleaned(source_name, len(df), len(rejects))
+            # Clean
+            df = clean_data(df, source["schema"], source["pk"])
             
-            # Step 4: Load to database
-            start_time = time.time()
-            load_result = self.loader.load_upsert(
-                df=df,
-                table=source_config.target_table,
-                pk=source_config.pk,
-            )
-            load_duration = time.time() - start_time
+            # Validate
+            valid_df, rejects = validate_data(df, name, source["schema"], source["rules"])
+            valid_count = len(valid_df)
+            rejected_count = len(rejects)
+            total_valid += valid_count
+            total_rejected += rejected_count
             
-            results["inserted"] = load_result["inserted"]
-            logger.log_load(
-                source_name,
-                load_result["inserted"],
-                load_result["updated"],
-                load_duration,
-            )
+            # Load
+            inserted = load_data(valid_df, engine, source["target_table"], source["pk"])
+            load_rejects(rejects, engine)
+            total_inserted += inserted
             
-            # Step 5: Load rejects
-            if rejects:
-                self.loader.load_rejects(rejects)
+            source_duration = time.time() - source_start
+            sources_succeeded += 1
             
-            logger.end_run(source_name, "success")
+            # Source summary
+            logger.info(f"[{name}] Input: {input_rows} | Valid: {valid_count} | Rejected: {rejected_count} | Inserted: {inserted} | Duration: {source_duration:.2f}s | Status: {status}")
             
         except Exception as e:
-            results["status"] = "error"
-            results["errors"].append(str(e))
-            logger.log_error(source_name, str(e))
-            logger.end_run(source_name, "error")
-        
-        return results
+            status = "FAILED"
+            sources_failed += 1
+            source_duration = time.time() - source_start
+            logger.error(f"[{name}] Error: {e} | Duration: {source_duration:.2f}s | Status: {status}")
     
-    def run_all(self) -> list[dict]:
-        """Run ingestion for all configured sources."""
-        results = []
-        for source_config in self.config.sources:
-            result = self.run_source(source_config)
-            results.append(result)
-        return results
+    # Pipeline summary
+    pipeline_duration = time.time() - pipeline_start
+    pipeline_status = "SUCCESS" if sources_failed == 0 else "PARTIAL" if sources_succeeded > 0 else "FAILED"
     
-    def run_by_name(self, source_name: str) -> dict | None:
-        """Run ingestion for a specific source by name."""
-        source_config = self.config.get_source(source_name)
-        if source_config is None:
-            logger.log_error(source_name, f"Source not found: {source_name}")
-            return None
-        return self.run_source(source_config)
+    logger.info("=" * 60)
+    logger.info("PIPELINE SUMMARY")
+    logger.info("=" * 60)
+    logger.info(f"Total Input Rows:    {total_input}")
+    logger.info(f"Valid Records:       {total_valid}")
+    logger.info(f"Rejected Records:    {total_rejected}")
+    logger.info(f"Inserted Records:    {total_inserted}")
+    logger.info(f"Sources Succeeded:   {sources_succeeded}")
+    logger.info(f"Sources Failed:      {sources_failed}")
+    logger.info(f"Total Duration:      {pipeline_duration:.2f}s")
+    logger.info(f"Pipeline Status:     {pipeline_status}")
+    logger.info("=" * 60)
     
-    def close(self):
-        """Close database connections."""
-        self.loader.close()
-
-
-def init_database(loader: DatabaseLoader):
-    """Initialize database tables."""
-    schema_sql = """
-        DROP TABLE IF EXISTS stg_books CASCADE;
-        DROP TABLE IF EXISTS stg_rejects CASCADE;
-        
-        CREATE TABLE IF NOT EXISTS stg_rejects (
-            id            SERIAL PRIMARY KEY,
-            source_name   TEXT NOT NULL,
-            raw_payload   JSONB NOT NULL,
-            reason        TEXT NOT NULL,
-            rejected_at   TIMESTAMP NOT NULL DEFAULT NOW()
-        );
-        
-        CREATE TABLE IF NOT EXISTS stg_books (
-            key                     TEXT PRIMARY KEY,
-            title                   TEXT NOT NULL,
-            subtitle                TEXT,
-            author_name             TEXT,
-            first_publish_year      INTEGER,
-            edition_count           INTEGER,
-            language                TEXT,
-            publisher               TEXT,
-            publish_date            TEXT,
-            isbn                    TEXT,
-            number_of_pages_median  INTEGER,
-            ratings_average         FLOAT,
-            ratings_count           INTEGER,
-            already_read_count      INTEGER,
-            subject                 TEXT,
-            has_fulltext            BOOLEAN,
-            _loaded_at              TIMESTAMP NOT NULL DEFAULT NOW()
-        )
-    """
-    loader.execute_sql(schema_sql)
-    print("Database tables initialized.")
-
-
-def main():
-    """Main entry point for the ingestion pipeline."""
-    import argparse
-    
-    parser = argparse.ArgumentParser(description="Data Ingestion Pipeline")
-    parser.add_argument(
-        "--config",
-        type=str,
-        default="config/sources.yml",
-        help="Path to configuration file",
-    )
-    parser.add_argument(
-        "--source",
-        type=str,
-        default=None,
-        help="Specific source to run (runs all if not specified)",
-    )
-    parser.add_argument(
-        "--init-db",
-        action="store_true",
-        help="Initialize database tables before running",
-    )
-    
-    args = parser.parse_args()
-    
-    config = AppConfig.from_yaml(args.config)
-    pipeline = IngestionPipeline(config)
-    
-    try:
-        if args.init_db:
-            init_database(pipeline.loader)
-        
-        if args.source:
-            result = pipeline.run_by_name(args.source)
-            if result:
-                print(f"\n{logger.get_summary(args.source)}")
-        else:
-            results = pipeline.run_all()
-            print("\n=== Ingestion Summary ===")
-            for result in results:
-                print(logger.get_summary(result["source"]))
-    
-    finally:
-        pipeline.close()
+    engine.dispose()
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Data Ingestion Pipeline")
+    parser.add_argument("--config", default="../config/sources.yml", help="Config file path")
+    parser.add_argument("--init-db", action="store_true", help="Initialize database tables")
+    
+    args = parser.parse_args()
+    run_pipeline(args.config, args.init_db)

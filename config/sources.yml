@@ -2,82 +2,206 @@
 # Data source: Open Library API (https://openlibrary.org/developers/api)
 
 defaults:
-  db_url: postgresql+psycopg://user:pass@localhost:5432/ingest_db
+  db_url: postgresql+psycopg://postgres:password@localhost:5432/postgres
   batch_size: 5000
-  on_conflict: upsert
 
 sources:
   - name: openlibrary_python_books
-    type: api
     path: https://openlibrary.org/search.json?q=python+programming&limit=100
     target_table: stg_books
     pk: [key]
     schema:
       key: str
       title: str
-      subtitle: str
       author_name: str
       first_publish_year: int
       edition_count: int
       language: str
-      publisher: str
-      publish_date: str
-      isbn: str
-      number_of_pages_median: int
-      ratings_average: float
-      ratings_count: int
-      already_read_count: int
-      subject: str
       has_fulltext: bool
     rules:
-      - rule: "len(title) > 0"
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
 
   - name: openlibrary_scifi_books
-    type: api
     path: https://openlibrary.org/search.json?subject=science+fiction&limit=100
     target_table: stg_books
     pk: [key]
     schema:
       key: str
       title: str
-      subtitle: str
       author_name: str
       first_publish_year: int
       edition_count: int
       language: str
-      publisher: str
-      publish_date: str
-      isbn: str
-      number_of_pages_median: int
-      ratings_average: float
-      ratings_count: int
-      already_read_count: int
-      subject: str
       has_fulltext: bool
     rules:
-      - rule: "len(title) > 0"
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
 
   - name: openlibrary_classics
-    type: api
     path: https://openlibrary.org/search.json?subject=classic+literature&limit=100
     target_table: stg_books
     pk: [key]
     schema:
       key: str
       title: str
-      subtitle: str
       author_name: str
       first_publish_year: int
       edition_count: int
       language: str
-      publisher: str
-      publish_date: str
-      isbn: str
-      number_of_pages_median: int
-      ratings_average: float
-      ratings_count: int
-      already_read_count: int
-      subject: str
       has_fulltext: bool
     rules:
-      - rule: "len(title) > 0"
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_fantasy
+    path: https://openlibrary.org/search.json?subject=fantasy&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_mystery
+    path: https://openlibrary.org/search.json?subject=mystery&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_history
+    path: https://openlibrary.org/search.json?subject=history&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_biography
+    path: https://openlibrary.org/search.json?subject=biography&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_horror
+    path: https://openlibrary.org/search.json?subject=horror&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_romance
+    path: https://openlibrary.org/search.json?subject=romance&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"
+
+  - name: openlibrary_philosophy
+    path: https://openlibrary.org/search.json?subject=philosophy&limit=100
+    target_table: stg_books
+    pk: [key]
+    schema:
+      key: str
+      title: str
+      author_name: str
+      first_publish_year: int
+      edition_count: int
+      language: str
+      has_fulltext: bool
+    rules:
+      - "len(title) > 0"
+      - "author_name NOT NULL"
+      - "first_publish_year NOT NULL"
+      - "language NOT NULL"
+      - "edition_count NOT NULL"
+      - "has_fulltext NOT NULL"

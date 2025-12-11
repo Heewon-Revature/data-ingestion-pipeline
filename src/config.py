@@ -1,77 +1,33 @@
 """
-Configuration management for the Data Ingestion Subsystem.
-Loads settings from YAML configuration files and environment variables.
+Configuration loader for the Data Ingestion Pipeline.
 """
 
 import os
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Any
-
 import yaml
 from dotenv import load_dotenv
 
+'''
+Load configuration from YAML file.
+Reads YAML configuration file, extracts default settings and source definitions.
+The database URL is overriden by DATABASE_URL environment variable from the .env file.
 
-@dataclass
-class SourceConfig:
-    """Configuration for a single data source."""
-    name: str
-    type: str
-    path: str
-    target_table: str
-    pk: list[str]
-    schema: dict[str, str]
-    rules: list[dict[str, str]] = field(default_factory=list)
-    
-    @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "SourceConfig":
-        return cls(
-            name=data["name"],
-            type=data["type"],
-            path=data.get("path", ""),
-            target_table=data["target_table"],
-            pk=data["pk"],
-            schema=data["schema"],
-            rules=data.get("rules", []),
-        )
+Args:
+    config_path: The path to the YAML configuration file.
 
-
-@dataclass
-class AppConfig:
-    """Main application configuration."""
-    db_url: str
-    batch_size: int
-    on_conflict: str
-    sources: list[SourceConfig]
+Returns:
+    A dictionary containing the database URL, batch size and a list of sources.
+'''
+def load_config(config_path):
+    """Load configuration from YAML file."""
+    load_dotenv()
     
-    @classmethod
-    def from_yaml(cls, config_path: str | Path) -> "AppConfig":
-        """Load configuration from a YAML file."""
-        load_dotenv()
-        
-        with open(config_path, "r") as f:
-            data = yaml.safe_load(f)
-        
-        defaults = data.get("defaults", {})
-        
-        # Allow environment variable override for db_url
-        db_url = os.getenv("DATABASE_URL", defaults.get("db_url", ""))
-        
-        sources = [
-            SourceConfig.from_dict(src) 
-            for src in data.get("sources", [])
-        ]
-        
-        return cls(
-            db_url=db_url,
-            batch_size=defaults.get("batch_size", 5000),
-            on_conflict=defaults.get("on_conflict", "upsert"),
-            sources=sources,
-        )
+    with open(config_path, "r") as f:
+        data = yaml.safe_load(f)
     
-    def get_source(self, name: str) -> SourceConfig | None:
-        """Get a source configuration by name."""
-        for source in self.sources:
-            if source.name == name:
-                return source
-        return None
+    defaults = data.get("defaults", {})
+    
+    return {
+        "db_url": os.getenv("DATABASE_URL", defaults.get("db_url", "")),
+        "batch_size": defaults.get("batch_size", 5000),
+        "sources": data.get("sources", []),
+    }

@@ -1,0 +1,120 @@
+2025-12-09 16:02:18,399 - INFO - Pipeline started - Processing 10 sources
+2025-12-09 16:02:18,399 - INFO - ============================================================
+2025-12-09 16:02:34,986 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 983 | Rejected: 28 | Inserted: 983 | Duration: 16.59s | Status: SUCCESS
+2025-12-09 16:02:55,715 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 20.73s | Status: SUCCESS
+2025-12-09 16:03:16,758 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 21.04s | Status: SUCCESS
+2025-12-09 16:03:41,546 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 24.79s | Status: SUCCESS
+2025-12-09 16:04:00,825 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 19.28s | Status: SUCCESS
+2025-12-09 16:04:53,703 - INFO - [openlibrary_history] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 52.88s | Status: SUCCESS
+2025-12-09 16:05:24,382 - INFO - [openlibrary_biography] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 30.68s | Status: SUCCESS
+2025-12-09 16:05:44,964 - INFO - [openlibrary_horror] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 20.58s | Status: SUCCESS
+2025-12-09 16:06:08,189 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 23.22s | Status: SUCCESS
+2025-12-09 16:06:30,937 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 22.75s | Status: SUCCESS
+2025-12-09 16:06:30,937 - INFO - ============================================================
+2025-12-09 16:06:30,938 - INFO - PIPELINE SUMMARY
+2025-12-09 16:06:30,938 - INFO - ============================================================
+2025-12-09 16:06:30,938 - INFO - Total Input Rows:    10000
+2025-12-09 16:06:30,938 - INFO - Valid Records:       9978
+2025-12-09 16:06:30,938 - INFO - Rejected Records:    33
+2025-12-09 16:06:30,938 - INFO - Inserted Records:    9978
+2025-12-09 16:06:30,939 - INFO - Sources Succeeded:   10
+2025-12-09 16:06:30,939 - INFO - Sources Failed:      0
+2025-12-09 16:06:30,939 - INFO - Total Duration:      252.92s
+2025-12-09 16:06:30,939 - INFO - Pipeline Status:     SUCCESS
+2025-12-09 16:06:30,939 - INFO - ============================================================
+2025-12-10 09:35:34,770 - INFO - Pipeline started - Processing 10 sources
+2025-12-10 09:35:34,771 - INFO - ============================================================
+2025-12-10 09:35:57,384 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 887 | Rejected: 137 | Inserted: 887 | Duration: 22.61s | Status: SUCCESS
+2025-12-10 09:36:34,207 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 36.82s | Status: SUCCESS
+2025-12-10 09:37:08,820 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 34.61s | Status: SUCCESS
+2025-12-10 09:37:46,242 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 37.42s | Status: SUCCESS
+2025-12-10 09:38:19,308 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 33.07s | Status: SUCCESS
+2025-12-10 09:39:16,679 - INFO - [openlibrary_history] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 57.37s | Status: SUCCESS
+2025-12-10 09:39:54,508 - INFO - [openlibrary_biography] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 37.83s | Status: SUCCESS
+2025-12-10 09:40:21,108 - INFO - [openlibrary_horror] Input: 1000 | Valid: 999 | Rejected: 1 | Inserted: 999 | Duration: 26.60s | Status: SUCCESS
+2025-12-10 09:40:49,954 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 28.85s | Status: SUCCESS
+2025-12-10 09:41:34,898 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 44.94s | Status: SUCCESS
+2025-12-10 09:41:34,898 - INFO - ============================================================
+2025-12-10 09:41:34,899 - INFO - PIPELINE SUMMARY
+2025-12-10 09:41:34,899 - INFO - ============================================================
+2025-12-10 09:41:34,899 - INFO - Total Input Rows:    10000
+2025-12-10 09:41:34,899 - INFO - Valid Records:       9882
+2025-12-10 09:41:34,899 - INFO - Rejected Records:    142
+2025-12-10 09:41:34,899 - INFO - Inserted Records:    9882
+2025-12-10 09:41:34,899 - INFO - Sources Succeeded:   10
+2025-12-10 09:41:34,899 - INFO - Sources Failed:      0
+2025-12-10 09:41:34,900 - INFO - Total Duration:      360.55s
+2025-12-10 09:41:34,900 - INFO - Pipeline Status:     SUCCESS
+2025-12-10 09:41:34,900 - INFO - ============================================================
+2025-12-10 09:59:27,347 - INFO - Pipeline started - Processing 10 sources
+2025-12-10 09:59:27,349 - INFO - ============================================================
+2025-12-10 09:59:51,761 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 887 | Rejected: 137 | Inserted: 887 | Duration: 24.41s | Status: SUCCESS
+2025-12-10 10:00:24,173 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 32.41s | Status: SUCCESS
+2025-12-10 10:00:50,749 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 26.58s | Status: SUCCESS
+2025-12-10 10:01:22,866 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 32.12s | Status: SUCCESS
+2025-12-10 10:01:48,922 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 26.06s | Status: SUCCESS
+2025-12-10 10:03:36,425 - INFO - [openlibrary_history] Input: 100 | Valid: 100 | Rejected: 0 | Inserted: 100 | Duration: 107.50s | Status: SUCCESS
+2025-12-10 10:05:16,512 - INFO - [openlibrary_biography] Input: 1000 | Valid: 997 | Rejected: 3 | Inserted: 997 | Duration: 100.09s | Status: SUCCESS
+2025-12-10 10:05:46,086 - INFO - [openlibrary_horror] Input: 1000 | Valid: 992 | Rejected: 9 | Inserted: 992 | Duration: 29.57s | Status: SUCCESS
+2025-12-10 10:06:36,295 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 50.21s | Status: SUCCESS
+2025-12-10 10:07:37,718 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 61.42s | Status: SUCCESS
+2025-12-10 10:07:37,718 - INFO - ============================================================
+2025-12-10 10:07:37,718 - INFO - PIPELINE SUMMARY
+2025-12-10 10:07:37,719 - INFO - ============================================================
+2025-12-10 10:07:37,719 - INFO - Total Input Rows:    9100
+2025-12-10 10:07:37,719 - INFO - Valid Records:       8968
+2025-12-10 10:07:37,719 - INFO - Rejected Records:    159
+2025-12-10 10:07:37,719 - INFO - Inserted Records:    8968
+2025-12-10 10:07:37,719 - INFO - Sources Succeeded:   10
+2025-12-10 10:07:37,720 - INFO - Sources Failed:      0
+2025-12-10 10:07:37,720 - INFO - Total Duration:      490.62s
+2025-12-10 10:07:37,720 - INFO - Pipeline Status:     SUCCESS
+2025-12-10 10:07:37,720 - INFO - ============================================================
+2025-12-10 10:19:14,459 - INFO - Pipeline started - Processing 10 sources
+2025-12-10 10:19:14,459 - INFO - ============================================================
+2025-12-10 10:19:37,271 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 887 | Rejected: 137 | Inserted: 887 | Duration: 22.81s | Status: SUCCESS
+2025-12-10 10:20:11,659 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 34.39s | Status: SUCCESS
+2025-12-10 10:20:50,501 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 38.84s | Status: SUCCESS
+2025-12-10 10:21:29,031 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 38.53s | Status: SUCCESS
+2025-12-10 10:21:54,083 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 25.05s | Status: SUCCESS
+2025-12-10 10:23:42,114 - WARNING - [openlibrary_history] No data fetched, skipping...
+2025-12-10 10:25:33,043 - INFO - [openlibrary_biography] Input: 700 | Valid: 698 | Rejected: 2 | Inserted: 698 | Duration: 110.93s | Status: SUCCESS
+2025-12-10 10:26:09,948 - INFO - [openlibrary_horror] Input: 1000 | Valid: 992 | Rejected: 9 | Inserted: 992 | Duration: 36.90s | Status: SUCCESS
+2025-12-10 10:27:06,324 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 56.38s | Status: SUCCESS
+2025-12-10 10:28:05,709 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 59.39s | Status: SUCCESS
+2025-12-10 10:28:05,709 - INFO - ============================================================
+2025-12-10 10:28:05,709 - INFO - PIPELINE SUMMARY
+2025-12-10 10:28:05,709 - INFO - ============================================================
+2025-12-10 10:28:05,710 - INFO - Total Input Rows:    8700
+2025-12-10 10:28:05,710 - INFO - Valid Records:       8569
+2025-12-10 10:28:05,710 - INFO - Rejected Records:    158
+2025-12-10 10:28:05,710 - INFO - Inserted Records:    8569
+2025-12-10 10:28:05,710 - INFO - Sources Succeeded:   9
+2025-12-10 10:28:05,711 - INFO - Sources Failed:      1
+2025-12-10 10:28:05,711 - INFO - Total Duration:      531.36s
+2025-12-10 10:28:05,711 - INFO - Pipeline Status:     PARTIAL
+2025-12-10 10:28:05,711 - INFO - ============================================================
+2025-12-10 18:14:29,417 - INFO - Pipeline started - Processing 10 sources
+2025-12-10 18:14:29,418 - INFO - ============================================================
+2025-12-10 18:14:48,112 - INFO - [openlibrary_python_books] Input: 1000 | Valid: 887 | Rejected: 137 | Inserted: 887 | Duration: 18.69s | Status: SUCCESS
+2025-12-10 18:15:17,470 - INFO - [openlibrary_scifi_books] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 29.36s | Status: SUCCESS
+2025-12-10 18:15:43,714 - INFO - [openlibrary_classics] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 26.24s | Status: SUCCESS
+2025-12-10 18:16:13,444 - INFO - [openlibrary_fantasy] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 29.73s | Status: SUCCESS
+2025-12-10 18:16:48,061 - INFO - [openlibrary_mystery] Input: 1000 | Valid: 998 | Rejected: 3 | Inserted: 998 | Duration: 34.62s | Status: SUCCESS
+2025-12-10 18:18:34,869 - WARNING - [openlibrary_history] No data fetched, skipping...
+2025-12-10 18:19:54,136 - INFO - [openlibrary_biography] Input: 1000 | Valid: 997 | Rejected: 3 | Inserted: 997 | Duration: 79.27s | Status: SUCCESS
+2025-12-10 18:20:21,580 - INFO - [openlibrary_horror] Input: 1000 | Valid: 992 | Rejected: 9 | Inserted: 992 | Duration: 27.44s | Status: SUCCESS
+2025-12-10 18:21:03,237 - INFO - [openlibrary_romance] Input: 1000 | Valid: 1000 | Rejected: 0 | Inserted: 1000 | Duration: 41.66s | Status: SUCCESS
+2025-12-10 18:21:58,230 - INFO - [openlibrary_philosophy] Input: 1000 | Valid: 998 | Rejected: 2 | Inserted: 998 | Duration: 54.99s | Status: SUCCESS
+2025-12-10 18:21:58,231 - INFO - ============================================================
+2025-12-10 18:21:58,231 - INFO - PIPELINE SUMMARY
+2025-12-10 18:21:58,232 - INFO - ============================================================
+2025-12-10 18:21:58,232 - INFO - Total Input Rows:    9000
+2025-12-10 18:21:58,232 - INFO - Valid Records:       8868
+2025-12-10 18:21:58,233 - INFO - Rejected Records:    159
+2025-12-10 18:21:58,233 - INFO - Inserted Records:    8868
+2025-12-10 18:21:58,233 - INFO - Sources Succeeded:   9
+2025-12-10 18:21:58,234 - INFO - Sources Failed:      1
+2025-12-10 18:21:58,234 - INFO - Total Duration:      449.29s
+2025-12-10 18:21:58,234 - INFO - Pipeline Status:     PARTIAL
+2025-12-10 18:21:58,234 - INFO - ============================================================
